@@ -16,16 +16,15 @@ return new class extends Migration
         Schema::create('barang', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_kategori')->constrained('kategori')->cascadeOnDelete()->cascadeOnUpdate();
-
             $table->string('nama_barang');
             $table->string('merk');
             $table->string('ukuran')->nullable();
             $table->string('bahan')->nullable();
-            $table->string('tahun');
+            $table->date('tahun');
             $table->string('asal_barang');
             $table->string('kondisi_barang');
             $table->string('jumlah_barang');
-            $table->string('harga_barang');
+            $table->decimal('harga_barang',13,2);
             $table->string('foto_barang');
             $table->foreignId('id_user')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();

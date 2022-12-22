@@ -22,4 +22,9 @@ class Kategori extends Model
         return $this->belongsTo(JenisKategori::class,'id_jenis','id');
 
     }
+    public function barang()
+    {
+        return $this->hasOne(Barang::class,'id_kategori');
+
+    }
 }

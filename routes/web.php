@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BarangController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JenisKategoriController;
 use App\Http\Controllers\KategoriController;
@@ -30,6 +31,8 @@ Route::middleware('auth')->group(function () {
     // kategori
     Route::resource('kategori',KategoriController::class);
     // User
+    Route::get('pdf',[BarangController::class,'pdfDownload'])->name('barang.pdf');
+    Route::resource('barang', BarangController::class);
     Route::resource('user', UserController::class);
     // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

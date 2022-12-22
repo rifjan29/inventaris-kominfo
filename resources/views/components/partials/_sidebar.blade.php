@@ -22,7 +22,7 @@
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="http://bootstrapdash.com/demo/star-admin2-free/docs/documentation.html">
+            <a class="nav-link" href="{{ route('barang.index') }}">
               <i class="menu-icon mdi mdi-file-document"></i>
               <span class="menu-title">Barang</span>
             </a>

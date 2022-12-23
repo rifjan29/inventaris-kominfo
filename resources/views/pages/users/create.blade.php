@@ -74,7 +74,7 @@
                             <div class="form-group">
                                 <label class="l">Role </label>
                                 <div class="d-flex">
-                                    @if (Auth::user()->role == 'admin' || Auth::user()->role == 'super-admin')
+                                    @if (Auth::user()->role == 'super-admin')
                                         <div class="mx-1">
                                             <div class="form-check">
                                             <label class="form-check-label">

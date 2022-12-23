@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('id_kategori')->constrained('kategori')->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('nama_barang');
-            $table->string('merk');
+            $table->string('merk')->nullable();
             $table->string('ukuran')->nullable();
             $table->string('bahan')->nullable();
             $table->date('tahun');

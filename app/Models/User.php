@@ -45,4 +45,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function barang()
+    {
+        return $this->hasOne(Barang::class,'id_user');
+
+    }
 }

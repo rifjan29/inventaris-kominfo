@@ -19,6 +19,8 @@ class BarangController extends Controller
     public function index(Request $request)
     {
         $data['title'] = 'Data Barang';
+        Session::forget('bulan');
+        Session::forget('tahun');
         if ($request->has('bulan') || $request->has('tahun')) {
             Session::put('bulan',$request->get('bulan'));
             Session::put('tahun',$request->get('tahun'));
@@ -140,7 +142,6 @@ class BarangController extends Controller
         $request->validate([
             'name' => 'required',
             'kategori' => 'required|not_in:0',
-            'merk' => 'required',
             'bahan' => 'required',
             'ukuran' => 'required',
             'tahun' => 'required',
@@ -200,17 +201,17 @@ class BarangController extends Controller
     {
         $data = Barang::latest();
         if (Session::has('bulan') || Session::has('tahun')) {
-           $query = $data->when($request->get('tahun'),function ($query) use ($request)
-                    {
-                        $query->whereYear('tahun',$request->get('tahun'));
+            $query = $data->when($request->session()->has('tahun'),function ($query) use ($request)
+                     {
+                         $query->whereYear('tahun',$request->session()->get('tahun'));
 
-                    })
-                    ->when($request->get('bulan'),function ($query) use ($request)
-                    {
-                        $query->whereMonth('tahun',$request->get('bulan'));
+                     })
+                     ->when($request->session()->has('bulan'),function ($query) use ($request)
+                     {
+                         $query->whereMonth('bulan',$request->session()->get('bulan'));
 
-                    })
-                    ->get();
+                     })
+                     ->get();
         }else{
             $query = $data->get();
         }

@@ -104,7 +104,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="exampleInputUsername1">Merk <span class="text-danger">*</span></label>
+                                    <label for="exampleInputUsername1">Merk <small class="text-danger">(Boleh Kosong)</small></label>
                                     <input type="text" name="merk" value="{{ old('merk') }}" class="form-control @error('merk') is-invalid @enderror" id="exampleInputUsername1" placeholder="Masukkan Merk">
                                       @error('merk')
                                       <small class="text-danger" style="font-size: 12px">

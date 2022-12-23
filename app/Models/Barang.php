@@ -30,4 +30,9 @@ class Barang extends Model
         return $this->belongsTo(Kategori::class,'id_kategori','id');
 
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class,'id_user','id');
+
+    }
 }

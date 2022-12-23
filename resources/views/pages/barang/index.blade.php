@@ -47,13 +47,15 @@
                                             Filter
                                         </button>
                                     </div>
+                                    @if (auth()->user()->role != 'anggota')
                                     <div class="col-md-2 align-self-center p-1">
                                         <a href="{{ route('barang.pdf') }}" type="button" class="btn btn-danger btn-icon-text w-100">
                                             <i class="ti-printer btn-icon-prepend"></i>
                                             Cetak PDF
                                         </a>
                                     </div>
-                                    <div class="col-md-2 align-self-center p-0">
+                                    @endif
+                                    <div class="col-md-2 align-self-center p-1">
                                         <a href="{{ route('barang.index') }}" class="btn btn-outline-danger btn-icon-text w-100">
                                             <i class="ti-shift-left btn-icon-prepend"></i>
                                             Reset
@@ -68,9 +70,11 @@
                     <div class="card-header">
                         <div class="d-flex justify-content-between py-2">
                             <h4 class="card-title pt-2">{{ ucwords($title) }}</h4>
+                            @if (auth()->user()->role != 'anggota')
                             <div>
                                 <a href="{{ route('barang.create') }}" class="btn btn-primary">Tambah Data</a>
                             </div>
+                            @endif
                         </div>
                     </div>
                     <div class="card-body">
@@ -78,26 +82,31 @@
                             <table class="table table-bordered">
                               <thead>
                                 <tr>
-                                  <th>#</th>
+                                  <th>No</th>
+                                  <th>NIP</th>
                                   <th>Nama Barang</th>
                                   <th>Kategori Barang</th>
                                   <th>Merk</th>
                                   <th>Jumlah Barang</th>
                                   <th>Harga Barang</th>
                                   <th>Tanggal</th>
+                                  @if (auth()->user()->role != 'anggota')
                                   <th>Action</th>
+                                  @endif
                                 </tr>
                               </thead>
                               <tbody>
                                 @forelse ($data as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $item->user->nip }}</td>
                                         <td>{{ ucwords($item->nama_barang) }}</td>
                                         <td>{{ ucwords($item->kategori->nama) }}</td>
                                         <td>{{ ucwords($item->merk) }}</td>
                                         <td>{{ ucwords($item->jumlah_barang) }}</td>
                                         <td>Rp . {{ number_format($item->harga_barang,2, ",", ".") }}</td>
                                         <td>{{ date('d M Y', strtotime($item->tahun )) }}</td>
+                                        @if (auth()->user()->role != 'anggota')
                                         <td>
                                             <div class="btn-group" role="group" aria-label="Basic example">
                                                 <a href="{{ route('barang.show',$item->id) }}" type="button" class="btn btn-primary">
@@ -116,6 +125,7 @@
 
                                             </div>
                                         </td>
+                                        @endif
                                     </tr>
                                 @empty
                                     <tr>

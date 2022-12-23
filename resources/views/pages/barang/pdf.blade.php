@@ -48,65 +48,55 @@
     <div class="p-4 my-5">
         <div class="row">
             <div class="col-md-12 mx-auto">
-                <div class="card">
+                <div class="card" style="border: none">
                     <div class="card-header">
                         <h4 class="card-title pt-2 font-weight-bold" style="font-weight: bold">Laporan Barang</h4>
 
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered table-responsive-sm">
+                            <table class="table table-bordered">
+                                <thead>
+                                  <tr>
+                                    <th>#</th>
+                                    <th>Nama Barang</th>
+                                    <th>Kategori Barang</th>
+                                    <th>Merk</th>
+                                    <th>Jumlah Barang</th>
+                                    <th>Harga Barang</th>
+                                    <th>Tanggal</th>
+                                  </tr>
+                                </thead>
                                 <tbody>
-                                @foreach ($data as $item)
-                                    <tr>
-                                        <td width="20%">Nama Barang</td>
-                                        <td width="1%">:</td>
-                                        <td >{{ ucwords($item->nama_barang) }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td width="20%">Merk</td>
-                                        <td width="1%">:</td>
-                                        <td >{{ ucwords($item->merk) }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td width="20%">Ukuran</td>
-                                        <td width="1%">:</td>
-                                        <td >{{ ucwords($item->ukuran) }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td width="20%">Bahan</td>
-                                        <td width="1%">:</td>
-                                        <td >{{ $item->bahan }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td width="20%">Tanggal</td>
-                                        <td width="1%">:</td>
-                                        <td >{{ date('d M Y', strtotime($item->tahun )) }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td width="20%">Asal Barang</td>
-                                        <td width="1%">:</td>
-                                        <td >{{ ucwords($item->asal_barang) }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td width="20%">Kondisi Barang</td>
-                                        <td width="1%">:</td>
-                                        <td >{{ ucwords($item->kondisi_barang) }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td width="20%">Jumlah Barang</td>
-                                        <td width="1%">:</td>
-                                        <td >{{ ucwords($item->jumlah_barang) }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td width="20%">Harga Barang</td>
-                                        <td width="1%">:</td>
-                                        <td >Rp . {{ number_format($item->harga_barang,2, ",", ".") }}</td>
-                                    </tr>
-
-                                @endforeach
+                                  @forelse ($data as $item)
+                                      <tr>
+                                          <td>{{ $loop->iteration }}</td>
+                                          <td>{{ ucwords($item->nama_barang) }}</td>
+                                          <td>{{ ucwords($item->kategori->nama) }}</td>
+                                          <td>{{ ucwords($item->merk) }}</td>
+                                          <td>{{ ucwords($item->jumlah_barang) }}</td>
+                                          <td>Rp . {{ number_format($item->harga_barang,2, ",", ".") }}</td>
+                                          <td>{{ date('d M Y', strtotime($item->tahun )) }}</td>
+                                      </tr>
+                                  @empty
+                                      <tr>
+                                          <td>Tidak ada data</td>
+                                      </tr>
+                                  @endforelse
                                 </tbody>
-                            </table>
+                              </table>
+                        </div>
+                        <div class="d-flex justify-content-between my-5">
+                            <div>
+                                <p class="p-0 m-0">Petugas Yang Menyerahkan</p>
+                                <p class="p-0 mb-5">{{ ucwords(auth()->user()->name) }}</p>
+                                <p class="p-0 m-0">NIP : {{ ucwords(auth()->user()->nip) }}</p>
+                            </div>
+                            <div>
+                                <p class="p-0 m-0">Bondowoso,{{ date('d M Y', strtotime(now())) }}</p>
+                                <p class="p-0 m-0">Penerima Laporan</p>
+                                <p class="p-0 m-0">Telah Di Teliti dan Hitung</p>
+                            </div>
                         </div>
                     </div>
                 </div>

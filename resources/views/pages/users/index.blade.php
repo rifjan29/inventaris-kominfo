@@ -44,7 +44,7 @@
                                         <td>{{ date('d M Y - H:i:s', strtotime($item->created_at )) }}</td>
                                         <td>
                                             <div class="btn-group" role="group" aria-label="Basic example">
-                                                @if (Auth::user()->role == 'anggota' || Auth::user()->role == 'admin')
+                                                @if (Auth::user()->role == 'anggota' || Auth::user()->role == 'admin' || Auth::user()->role == 'operator')
                                                     @if (Auth::user()->id == $item->id)
                                                         <a href="{{ route('user.edit',$item->id) }}" type="button" class="btn btn-primary">
                                                         <i class="ti-pencil-alt"></i>

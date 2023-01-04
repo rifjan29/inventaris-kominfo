@@ -84,14 +84,25 @@
                                             </div>
                                         </div>
                                     @endif
+                                        @if (Auth::user()->role != 'operator')
                                         <div class="mx-1">
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" name="role" id="membershipRadios2" value="anggota">
-                                            Anggota
-                                            </label>
+                                            <div class="form-check">
+                                                <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" name="role" id="membershipRadios2" value="anggota">
+                                                Anggota
+                                                </label>
+                                            </div>
                                         </div>
+                                        @else
+                                        <div class="mx-1">
+                                            <div class="form-check">
+                                                <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" name="role" id="membershipRadios2" value="operator">
+                                                Operator
+                                                </label>
+                                            </div>
                                         </div>
+                                        @endif
                                     @if (Auth::user()->role == 'super-admin')
                                     <div class="mx-1">
                                         <div class="form-check">
@@ -99,6 +110,14 @@
                                             <input type="radio" class="form-check-input" name="role" id="membershipRadios2" value="super-admin">
                                             Super Admin
                                           </label>
+                                        </div>
+                                    </div>
+                                    <div class="mx-1">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="role" id="membershipRadios2" value="operator">
+                                            Operator
+                                            </label>
                                         </div>
                                     </div>
                                     @endif

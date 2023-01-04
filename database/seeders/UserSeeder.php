@@ -16,8 +16,8 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $role = ['super-admin','admin','anggota'];
-        $name = ['Super Admin','Admin','Anggota'];
+        $role = ['super-admin','admin','anggota', 'operator'];
+        $name = ['Super Admin','Admin','Anggota', 'Operator'];
         for ($i=0; $i < count($name); $i++) {
             User::create([
                 'name' => $name[$i],

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('jabatan')->nullable();
             $table->string('nip')->nullable();
             $table->string('jabatan_keanggotaan')->nullable();
-            $table->enum('role',['super-admin','admin','anggota']);
+            $table->enum('role',['super-admin','admin','anggota','operator']);
         });
     }
 

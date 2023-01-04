@@ -22,7 +22,7 @@ class UserController extends Controller
         $sql =new User;
         if (Auth::user()->role == 'super-admin') {
             $data['data'] = $sql->get();
-        } elseif (Auth::user()->role == 'admin') {
+        } elseif (Auth::user()->role == 'admin' && Auth::user()->role == 'operator') {
             $data['data'] = $sql->where('role','!=', 'super-admin')->get();
         } else {
             $data['data'] = $sql->where('role','!=', 'super-admin')->where('role','!=', 'admin')->get();

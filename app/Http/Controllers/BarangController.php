@@ -200,6 +200,7 @@ class BarangController extends Controller
     public function pdfDownload(Request $request)
     {
         $data = Barang::latest();
+
         if (Session::has('bulan') || Session::has('tahun')) {
             $query = $data->when($request->session()->has('tahun'),function ($query) use ($request)
                      {
@@ -208,7 +209,7 @@ class BarangController extends Controller
                      })
                      ->when($request->session()->has('bulan'),function ($query) use ($request)
                      {
-                         $query->whereMonth('bulan',$request->session()->get('bulan'));
+                         $query->whereMonth('tahun',$request->session()->get('bulan'));
 
                      })
                      ->get();

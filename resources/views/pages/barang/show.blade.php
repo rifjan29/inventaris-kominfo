@@ -1,6 +1,13 @@
 <x-app-layout>
     @push('css')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        .table td img{
+            width: 400px !important;
+            height: 400px !important;
+            border-radius: 20px !important;
+        }
+    </style>
     @endpush
     @push('js')
     <script src="{{ asset('') }}assets/vendors/typeahead.js/typeahead.bundle.min.js"></script>
@@ -80,6 +87,13 @@
                                         <td width="20%">Harga Barang</td>
                                         <td width="1%">:</td>
                                         <td >Rp . {{ number_format($data->harga_barang,2, ",", ".") }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td width="20%">Foto Barang</td>
+                                        <td width="1%">:</td>
+                                        <td >
+                                                <img src="{{ $data->foto_barang != null ?  asset('img/barang/'.$data->foto_barang) : asset('assets/images/noimage.png') }}" alt="" class="img-fluid"  id="photosPreview">
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>

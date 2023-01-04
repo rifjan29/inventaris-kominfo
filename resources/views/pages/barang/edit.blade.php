@@ -190,7 +190,7 @@
                                     <div class="input-group-prepend">
                                       <span class="input-group-text bg-primary text-white">Rp</span>
                                     </div>
-                                    <input type="text" id="harga_barang" name="harga_barang" class="form-control @error('harga_barang') is-invalid @enderror" value="{{ old('harga_barang',$data->harga_barang) }}" aria-label="Amount (to the nearest dollar)">
+                                    <input type="text" id="harga_barang" name="harga_barang" class="form-control @error('harga_barang') is-invalid @enderror" value="{{ old('harga_barang',(int)$data->harga_barang) }}" aria-label="Amount (to the nearest dollar)">
                                     <div class="input-group-append">
                                       <span class="input-group-text">.00</span>
                                     </div>

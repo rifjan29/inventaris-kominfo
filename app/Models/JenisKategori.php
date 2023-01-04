@@ -15,7 +15,7 @@ class JenisKategori extends Model
     ];
     public function kategori()
     {
-        return $this->hasOne(Kategori::'id_jenis');
+        return $this->hasOne(Kategori::class,'id_jenis');
 
     }
 }

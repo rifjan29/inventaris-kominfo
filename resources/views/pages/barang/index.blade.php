@@ -1,6 +1,13 @@
 <x-app-layout>
     @push('css')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        .table td img{
+            width: 200px !important;
+            height: 200px !important;
+            border-radius: 0 !important;
+        }
+    </style>
     @endpush
     @push('js')
     <script src="{{ asset('') }}assets/vendors/typeahead.js/typeahead.bundle.min.js"></script>
@@ -122,11 +129,36 @@
                                                     <i class="ti-trash"></i>
                                                     </button>
                                                 </form>
-
+                                                {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+                                                    QRCode
+                                                </button> --}}
                                             </div>
                                         </td>
                                         @endif
                                     </tr>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="d-flex justify-content-center">
+                                                    {{-- <img width="54" src="data:image/png;base64, {{ base64_encode( "> --}}
+                                                    {{-- {!! QrCode::format('png')->merge(asset('assets/images/logo-kominfo.png'), 0.3, true)->generate($item->id) !!} --}}
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
                                 @empty
                                     <tr>
                                         <td>Tidak ada data</td>

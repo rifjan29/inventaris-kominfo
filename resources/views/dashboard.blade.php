@@ -1,7 +1,7 @@
 <x-app-layout>
     @section('content')
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-sm-6">
           <div class="home-tab">
               <div class="row">
                 <div class="col-lg-6 d-flex flex-column">
@@ -75,6 +75,46 @@
             </div>
           </div>
         </div>
+        <div class="col-sm-6">
+            <div class="col-md-12 col-lg-12 grid-margin stretch-card">
+                <div class="card card-rounded">
+                  <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                      <h4 class="card-title card-title-dash">Activities</h4>
+                      @php
+                          $count = \Spatie\Activitylog\Models\Activity::count();
+                      @endphp
+                      <p class="mb-0">{{ $count }} Aktivitas yang telah dilakukan</p>
+                    </div>
+                    <ul class="bullet-line-list">
+                        @foreach ($data as $item)
+                            @php
+                                $user = \App\Models\User::find($item->causer_id)->first()->email;
+                                $createdAt = $item->created_at;
+                                $now = \Carbon\Carbon::now();
+                                $difference = $createdAt->diffForHumans();
+
+                            @endphp
+                            <li>
+                            <div class="d-flex justify-content-between">
+                                <div><span class="text-light-green" style="color: #224BCA">{{ ucwords($user) }} </span><strong>{{ $item->description }}</strong> data <strong>{{ $item->log_name }}</strong> </div>
+                                <p>{{  $difference }}</p>
+                            </div>
+                            </li>
+                        @endforeach
+                    </ul>
+                    <div class="list align-items-center pt-3">
+                      <div class="wrapper w-100">
+                        <p class="mb-0">
+                          {{-- <a href="#" class="fw-bold text-primary">Show all <i class="mdi mdi-arrow-right ms-2"></i></a> --}}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+
       </div>
     @endsection
 </x-app-layout>

@@ -4,9 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Barang extends Model
 {
+    use LogsActivity;
     use HasFactory;
     protected $table = 'barang';
     protected $fillable = [
@@ -34,5 +37,11 @@ class Barang extends Model
     {
         return $this->belongsTo(User::class,'id_user','id');
 
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->useLogName('Barang');
     }
 }

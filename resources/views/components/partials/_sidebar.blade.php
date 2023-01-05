@@ -16,9 +16,9 @@
                 </a>
                 <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link {{ Request::segment(2) == 'jenis-kategori' ? 'active' : ''  }}" href="{{ route('jenis-kategori.index') }}">Jenis Kategori</a></li>
-                    <li class="nav-item"> <a class="nav-link {{ Request::segment(2) == 'kategori' ? 'active' : ''  }}" href="{{ route('kategori.index') }}">Kategori Barang</a></li>
-                    <li class="nav-item"> <a class="nav-link {{ Request::segment(2) == 'kategori' ? 'active' : ''  }}" href="{{ route('user.index') }}">User</a></li>
+                    <li class="nav-item"> <a class="nav-link {{ Request::segment(2) == "jenis-kategori" ? "active" : " "  }}" href="{{ route('jenis-kategori.index') }}">Jenis Kategori</a></li>
+                    <li class="nav-item"> <a class="nav-link {{ Request::segment(2) == "kategori" ? "active" : " "  }}" href="{{ route('kategori.index') }}">Kategori Barang</a></li>
+                    <li class="nav-item"> <a class="nav-link {{ Request::segment(2) == 'user' ? 'active' : ''  }}" href="{{ route('user.index') }}">User</a></li>
                 </ul>
                 </div>
             </li>
@@ -27,6 +27,12 @@
             <a class="nav-link {{ Request::segment(1) == 'barang' ? 'active' : ''  }}"" href="{{ route('barang.index') }}">
               <i class="menu-icon mdi mdi-file-document"></i>
               <span class="menu-title">Barang</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {{ Request::segment(1) == 'log-user' ? 'active' : ''  }}"" href="{{ route('log.user') }}">
+              <i class="menu-icon ti-user"></i>
+              <span class="menu-title">LOG User</span>
             </a>
           </li>
         </ul>

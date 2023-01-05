@@ -97,6 +97,7 @@
                                   <th>Jumlah Barang</th>
                                   <th>Harga Barang</th>
                                   <th>Tanggal</th>
+                                  <th>Status</th>
                                   @if (auth()->user()->role != 'anggota')
                                   <th>Action</th>
                                   @endif
@@ -113,6 +114,12 @@
                                         <td>{{ ucwords($item->jumlah_barang) }}</td>
                                         <td>Rp . {{ number_format($item->harga_barang,2, ",", ".") }}</td>
                                         <td>{{ date('d M Y', strtotime($item->tahun )) }}</td>
+                                        <td>
+                                            @if ($item->updated_at != null)
+                                            <span class="badge badge-warning">Telah Diedit pada : {{ date('d M Y', strtotime($item->updated_at )) }}</span></td>
+                                            @else
+                                            -
+                                            @endif
                                         @if (auth()->user()->role != 'anggota')
                                         <td>
                                             <div class="btn-group" role="group" aria-label="Basic example">

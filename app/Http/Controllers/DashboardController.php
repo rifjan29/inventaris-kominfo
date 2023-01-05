@@ -7,6 +7,7 @@ use App\Models\JenisKategori;
 use App\Models\Kategori;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\Activitylog\Models\Activity;
 
 class DashboardController extends Controller
 {
@@ -16,6 +17,7 @@ class DashboardController extends Controller
         $data['jenis'] = JenisKategori::count();
         $data['kategori'] = Kategori::count();
         $data['user'] = User::count();
+        $data['data'] = Activity::latest()->take(10)->get();
         return view('dashboard', $data);
     }
 

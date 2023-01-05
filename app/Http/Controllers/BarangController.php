@@ -84,6 +84,7 @@ class BarangController extends Controller
             $barang->asal_barang = $request->get('asal_barang');
             $barang->kondisi_barang = $request->get('kondisi_barang');
             $barang->jumlah_barang = $request->get('jumlah_barang');
+            $barang->updated_at = null;
             $barang->harga_barang = $this->formatNumber($request->get('harga_barang'));
             if ($request->hasFile('gambar_konten')) {
                 $photos = $request->file('gambar_konten');
@@ -161,6 +162,8 @@ class BarangController extends Controller
             $barang->asal_barang = $request->get('asal_barang');
             $barang->kondisi_barang = $request->get('kondisi_barang');
             $barang->jumlah_barang = $request->get('jumlah_barang');
+            $barang->updated_at = now();
+
             $barang->harga_barang = $this->formatNumber($request->get('harga_barang'));
             if ($request->hasFile('gambar_konten')) {
                 $photos = $request->file('gambar_konten');

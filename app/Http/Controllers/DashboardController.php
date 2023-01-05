@@ -18,6 +18,7 @@ class DashboardController extends Controller
         $data['kategori'] = Kategori::count();
         $data['user'] = User::count();
         $data['data'] = Activity::latest()->take(10)->get();
+
         return view('dashboard', $data);
     }
 

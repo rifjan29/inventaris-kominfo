@@ -20,7 +20,9 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+
     protected $fillable = [
+        'id',
         'name',
         'email',
         'password',
@@ -58,6 +60,10 @@ class User extends Authenticatable
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
+            ->logAll()
+            ->dontLogIfAttributesChangedOnly(['text'])
+            ->logOnlyDirty()
             ->useLogName('User');
+
     }
 }

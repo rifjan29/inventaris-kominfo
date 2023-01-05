@@ -87,9 +87,9 @@
                       <p class="mb-0">{{ $count }} Aktivitas yang telah dilakukan</p>
                     </div>
                     <ul class="bullet-line-list">
-                        @foreach ($data as $item)
+                        @forelse ($data as $item)
                             @php
-                                $user = \App\Models\User::find($item->causer_id)->first()->email;
+                                $user = \App\Models\User::find($item->subject_id)->first()->email;
                                 $createdAt = $item->created_at;
                                 $now = \Carbon\Carbon::now();
                                 $difference = $createdAt->diffForHumans();
@@ -101,7 +101,9 @@
                                 <p>{{  $difference }}</p>
                             </div>
                             </li>
-                        @endforeach
+                        @empty
+                            af
+                        @endforelse
                     </ul>
                     <div class="list align-items-center pt-3">
                       <div class="wrapper w-100">

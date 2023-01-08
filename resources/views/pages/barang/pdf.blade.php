@@ -40,6 +40,10 @@
                 width: 210mm;
                 height: 297mm;
             }
+            .no-print, .no-print *
+            {
+                display: none !important;
+            }
         /* ... the rest of the rules ... */
         }
     </style>
@@ -50,8 +54,12 @@
             <div class="col-md-12 mx-auto">
                 <div class="card" style="border: none">
                     <div class="card-header">
-                        <h4 class="card-title pt-2 font-weight-bold" style="font-weight: bold">Laporan Barang</h4>
-
+                        <div class="d-flex justify-content-between">
+                            <h4 class="card-title pt-2 font-weight-bold" style="font-weight: bold">Laporan Barang</h4>
+                            <div class="mx-3">
+                                <button onclick="history.back()" class="btn btn-primary btn-icon-text no-print"><i class="ti-angle-left btn-icon-prepend"></i> Kembali</button>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">

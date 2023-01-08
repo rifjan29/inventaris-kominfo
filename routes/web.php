@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HistoryBarangController;
 use App\Http\Controllers\JenisKategoriController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LogUserController;
@@ -31,13 +32,15 @@ Route::middleware('auth')->group(function () {
     Route::resource('kategori',KategoriController::class);
     // User
     Route::get('pdf',[BarangController::class,'pdfDownload'])->name('barang.pdf');
+    Route::delete('{id}/delete-permanent-barang', [BarangController::class, 'deletePermanent'])->name('barang.deletePermanent');
+    Route::post('{id}/restore-barang',[BarangController::class,'restore'])->name('barang.restore');
     Route::resource('barang', BarangController::class);
     Route::resource('user', UserController::class);
     // log user
     Route::get('log-user',[LogUserController::class,'loguser'])->name('log.user');
-    // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    // history barang
+    Route::get('history-barang',[HistoryBarangController::class, 'history'])->name('history.barang');
+
 });
 
 require __DIR__.'/auth.php';

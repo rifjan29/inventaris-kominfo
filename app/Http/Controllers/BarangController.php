@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Barang;
 use App\Models\Kategori;
 use Exception;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -35,6 +36,8 @@ class BarangController extends Controller
                         $query->whereMonth('tahun',$request->get('bulan'));
 
                     })
+                    ->withTrashed()
+                    ->latest()
                     ->paginate(2)
                     ->withQueryString();
         return view('pages.barang.index',$data);
@@ -61,6 +64,7 @@ class BarangController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'nip' => 'required|max:16',
             'name' => 'required',
             'kategori' => 'required|not_in:0',
             'merk' => 'required',
@@ -76,6 +80,7 @@ class BarangController extends Controller
         try {
             $barang = new Barang;
             $barang->nama_barang = $request->get('name');
+            $barang->nip = $request->get('nip');
             $barang->id_kategori = $request->get('kategori');
             $barang->merk = $request->get('merk');
             $barang->ukuran = $request->get('ukuran');
@@ -126,7 +131,7 @@ class BarangController extends Controller
     public function edit($id)
     {
         $data['title'] = 'Edit Barang';
-        $data['data'] = Barang::find($id);
+        $data['data'] = Barang::withTrashed()->find($id);
         $data['kategori'] = Kategori::latest()->get();
         return view('pages.barang.edit',$data);
     }
@@ -141,6 +146,7 @@ class BarangController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
+            'nip' => 'required|max:16',
             'name' => 'required',
             'kategori' => 'required|not_in:0',
             'bahan' => 'required',
@@ -152,7 +158,7 @@ class BarangController extends Controller
             'harga_barang' => 'required',
         ]);
         try{
-            $barang = Barang::find($id);
+            $barang = Barang::withTrashed()->find($id);
             $barang->nama_barang = $request->get('name');
             $barang->id_kategori = $request->get('kategori');
             $barang->merk = $request->get('merk');
@@ -181,6 +187,7 @@ class BarangController extends Controller
             $barang->update();
             return redirect()->route('barang.index')->withStatus('Berhasil mengganti data');
         } catch (Exception $e) {
+            return $e;
             return redirect()->route('barang.index')->withError('Terjadi kesalahan');
         }
     }
@@ -193,10 +200,13 @@ class BarangController extends Controller
      */
     public function destroy($id)
     {
-        $barang = Barang::find($id);
-        $last_path = public_path().'/img/barang/'.$barang->foto_barang;
-        unlink($last_path);
-        $barang->delete();
+        // $barang = Barang::find($id);
+        Barang::withTrashed()->where('id',$id)->update([
+            'is_active' => '0',
+            // 'updated_at' => null,
+
+        ]);
+        Barang::withTrashed()->where('id',$id)->delete();
         return redirect()->route('barang.index')->withStatus('Berhasil menghapus data');
 
     }
@@ -228,5 +238,31 @@ class BarangController extends Controller
     public function pecahBulan($param)
     {
         return explode('-', $param);
+    }
+
+    public function restore($id)
+    {
+        try {
+            Barang::withTrashed()->where('id',$id)->update([
+                'is_active' => true,
+                // 'updated_at' => null,
+            ]);
+            $restore = Barang::withTrashed()->where('id',$id);
+            $restore->restore();
+            return redirect()->route('barang.index')->withStatus('Berhasil mengganti status data.');
+        } catch (Exception $e) {
+            return redirect()->route('barang.index')->withError('Terjadi kesalahan.');
+        } catch (QueryException $e){
+            return redirect()->route('barang.index')->withError('Terjadi kesalahan.');
+        }
+    }
+
+    public function deletePermanent($id)
+    {
+        $data = Barang::withTrashed()->where('id',$id);
+        $last_path = public_path().'/img/barang/'.$data->foto_barang;
+        unlink($last_path);
+        $data->forceDelete();
+        return redirect()->route('barang.index')->with('status', 'Data berhasil dihapus permanent!');
     }
 }

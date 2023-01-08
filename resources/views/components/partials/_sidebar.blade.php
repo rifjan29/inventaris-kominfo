@@ -31,8 +31,14 @@
           </li>
           <li class="nav-item">
             <a class="nav-link {{ Request::segment(1) == 'log-user' ? 'active' : ''  }}"" href="{{ route('log.user') }}">
-              <i class="menu-icon ti-user"></i>
+              <i class="menu-icon mdi mdi-account-key"></i>
               <span class="menu-title">LOG User</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {{ Request::segment(1) == 'history-barang' ? 'active' : ''  }}"" href="{{ route('history.barang') }}">
+              <i class="menu-icon mdi mdi-history"></i>
+              <span class="menu-title">History Barang</span>
             </a>
           </li>
         </ul>

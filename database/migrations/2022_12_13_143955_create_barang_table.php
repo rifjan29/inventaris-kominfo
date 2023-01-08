@@ -27,7 +27,9 @@ return new class extends Migration
             $table->decimal('harga_barang',13,2);
             $table->string('foto_barang');
             $table->foreignId('id_user')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->enum('is_active', [1, 0])->default(true)->comment('0:false; 1:true');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

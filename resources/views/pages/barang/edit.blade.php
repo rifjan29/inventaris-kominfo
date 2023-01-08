@@ -23,7 +23,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         $('.tahun').datepicker({
-            format: 'mm-dd-yyyy',
+            format: 'yyyy-mm-dd',
+
         });
         $(document).ready(function() {
             var harga_barang = document.getElementById("harga_barang");
@@ -79,6 +80,16 @@
                         <form class="forms-sample" action="{{ route('barang.update',$data->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
+                            <div class="form-group">
+                                <label for="exampleInputUsername1">NIP <span class="text-danger">*</span></label>
+                                <input type="text" name="nip" value="{{ old('nip',$data->nip) }}" class="form-control @error('nip') is-invalid @enderror" id="exampleInputUsernip1" placeholder="Masukkan Nama Jenis">
+                                  @error('nip')
+                                  <small class="text-danger" style="font-size: 12px">
+                                      {{ $message }}.
+                                  </small>
+
+                                  @enderror
+                            </div>
                             <div class="form-group">
                               <label for="exampleInputUsername1">Nama Barang <span class="text-danger">*</span></label>
                               <input type="text" name="name" value="{{ old('name',$data->nama_barang) }}" class="form-control @error('name') is-invalid @enderror" id="exampleInputUsername1" placeholder="Masukkan Nama Jenis">

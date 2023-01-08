@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
@@ -11,7 +12,9 @@ class Barang extends Model
 {
     use LogsActivity;
     use HasFactory;
+    use SoftDeletes;
     protected $table = 'barang';
+    public $timestamps = false;
     protected $fillable = [
         'id',
         'id_kategori',
@@ -25,6 +28,7 @@ class Barang extends Model
         'jumlah_barang',
         'harga_barang',
         'foto_barang',
+        'is_active',
         'id_user',
 
     ];
@@ -42,6 +46,9 @@ class Barang extends Model
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
+            ->logAll()
+            ->dontLogIfAttributesChangedOnly(['text'])
+            ->logOnlyDirty()
             ->useLogName('Barang');
     }
 }

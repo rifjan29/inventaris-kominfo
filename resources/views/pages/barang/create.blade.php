@@ -79,6 +79,15 @@
                         <form class="forms-sample" action="{{ route('barang.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
+                                <label for="exampleInputUsername1">NIP <span class="text-danger">*</span></label>
+                                <input type="text" name="nip" value="{{ old('nip') }}" class="form-control @error('nip') is-invalid @enderror" id="exampleInputUsernip1" placeholder="Masukkan NIP">
+                                  @error('nip')
+                                  <small class="text-danger" style="font-size: 12px">
+                                      {{ $message }}.
+                                  </small>
+                                  @enderror
+                            </div>
+                            <div class="form-group">
                               <label for="exampleInputUsername1">Nama Barang <span class="text-danger">*</span></label>
                               <input type="text" name="name" value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror" id="exampleInputUsername1" placeholder="Masukkan Nama Jenis">
                                 @error('name')

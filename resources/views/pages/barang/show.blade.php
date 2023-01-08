@@ -4,7 +4,7 @@
     <style>
         .table td img{
             width: 400px !important;
-            height: 400px !important;
+            height: 300px !important;
             border-radius: 20px !important;
         }
     </style>
@@ -43,6 +43,11 @@
                         <div class="table-responsive">
                             <table class="table table-bordered table-responsive-sm">
                                 <tbody>
+                                    <tr>
+                                        <td width="20%">NIP</td>
+                                        <td width="1%">:</td>
+                                        <td >{{ ucwords($data->nip) }}</td>
+                                    </tr>
                                     <tr>
                                         <td width="20%">Nama Barang</td>
                                         <td width="1%">:</td>
@@ -92,7 +97,7 @@
                                         <td width="20%">Foto Barang</td>
                                         <td width="1%">:</td>
                                         <td >
-                                                <img src="{{ $data->foto_barang != null ?  asset('img/barang/'.$data->foto_barang) : asset('assets/images/noimage.png') }}" alt="" class="img-fluid"  id="photosPreview">
+                                                <img src="{{ $data->foto_barang != null ?  asset('img/barang/'.$data->foto_barang) : asset('assets/images/noimage.png') }}" alt="" class="img-fluid "  id="">
                                         </td>
                                     </tr>
                                 </tbody>

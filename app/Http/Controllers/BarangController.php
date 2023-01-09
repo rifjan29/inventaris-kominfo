@@ -36,7 +36,7 @@ class BarangController extends Controller
                         $query->whereMonth('tahun',$request->get('bulan'));
 
                     })
-                    ->withTrashed()
+                    // ->withTrashed()
                     ->latest()
                     ->paginate(2)
                     ->withQueryString();
@@ -131,7 +131,8 @@ class BarangController extends Controller
     public function edit($id)
     {
         $data['title'] = 'Edit Barang';
-        $data['data'] = Barang::withTrashed()->find($id);
+        // $data['data'] = Barang::withTrashed()->find($id);
+        $data['data'] = Barang::find($id);
         $data['kategori'] = Kategori::latest()->get();
         return view('pages.barang.edit',$data);
     }

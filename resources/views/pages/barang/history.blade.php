@@ -111,6 +111,7 @@
                                                 <th>Jumlah Barang</th>
                                                 <th>Harga Barang</th>
                                                 <th>Tanggal</th>
+                                                <th>Aksi</th>
                                             </tr>
                                           </thead>
                                           <tbody>
@@ -126,6 +127,12 @@
                                                     <td>{{ $item->jumlah_barang }}</td>
                                                     <td>Rp . {{ number_format($item->harga_barang,2, ",", ".") }}</td>
                                                     <td>{{ date('d M Y', strtotime($item->tahun )) }}</td>
+                                                    <td>
+                                                    <form action="{{ route('barang.restore',$item->id) }}" class="p-0 m-0" method="POST" onsubmit="return confirm('return data ?')">
+                                                        @csrf
+                                                        <button class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Ganti Status"><i class="mdi mdi-backup-restore"></i></button>
+                                                    </form>
+                                                    </td>
                                                 </tr>
                                             @empty
                                                 <tr>

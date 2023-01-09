@@ -129,23 +129,17 @@
                                                 <a href="{{ route('barang.edit',$item->id) }}" type="button" class="btn btn-primary">
                                                   <i class="ti-pencil-alt"></i>
                                                 </a>
-                                                <form action="{{ $item->is_active != 0 ? route('barang.destroy',$item->id) : route('barang.restore',$item->id) }}" class="p-0 m-0" method="POST" onsubmit="return confirm('{{ $item->is_active != 0 ? 'Move data to trash? ' : 'return data ?' }}')">
-                                                    @if ($item->is_active != 0)
-                                                        @method('delete')
-                                                    @endif
-                                                    @csrf
-                                                    <button class="btn {{ $item->is_active != 0 ? 'btn-danger' : 'btn-warning' }} " data-toggle="tooltip" data-placement="top" title="Ganti Status"><i class="ti-power-off"></i></button>
-                                                </form>
-                                                {{-- <form action="{{ route('barang.destroy',$item->id) }}" method="POST" onsubmit="return confirm('Move data to trash? ')">
-                                                    @csrf
+                                                {{-- <form action="{{ $item->is_active != 0 ? route('barang.destroy',$item->id) : route('barang.restore',$item->id) }}" class="p-0 m-0" method="POST" onsubmit="return confirm('{{ $item->is_active != 0 ? 'Move data to trash? ' : 'return data ?' }}')"> --}}
+                                                <form action="{{ route('barang.destroy',$item->id) }}" class="p-0 m-0" method="POST" onsubmit="return confirm('Move data to trash? ')">
                                                     @method('delete')
-                                                    <button class="btn btn-primary">
-                                                    <i class="ti-trash"></i>
-                                                    </button>
-                                                </form> --}}
-                                                {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
-                                                    QRCode
-                                                </button> --}}
+                                                    {{-- @if ($item->is_active != 0)
+                                                    @method('delete')
+                                                @endif --}}
+                                                    @csrf
+                                                    {{-- <button class="btn {{ $item->is_active != 0 ? 'btn-danger' : 'btn-warning' }} " data-toggle="tooltip" data-placement="top" title="Ganti Status"><i class="ti-power-off"></i></button> --}}
+                                                    <button class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Ganti Status"><i class="ti-power-off"></i></button>
+                                                </form>
+
                                             </div>
                                         </td>
                                         @endif
